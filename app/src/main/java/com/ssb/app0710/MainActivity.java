@@ -66,5 +66,19 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
 
     }
-
+    //첫번째 매개변수는 권한 요청을 할 때 설정한 번호
+    //두번째 매개변수는 요청한 권한
+    //세번째 매개변수는 사용자가 권한에 대해서 응답한 것
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[]permissions,int[] grantResults){
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        if(requestCode==100&&grantResults.length>0){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                getProviders();
+                getLocation();
+            }else {
+                showToast("권한을 사용할 수 없습니다.");
+            }
+        }
+    }
 }
